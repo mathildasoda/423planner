@@ -25,36 +25,62 @@ ds_soup = soup(ds_html, "html.parser")
 
 table = ds_soup.find("table", {"class":"sc_courselist"})
 
+def cleanScrape(bla):
+    bla = str(bla.text)
+    todelete = re.findall("<.*?>",bla)
+    for c in todelete:
+        bla.remove(c,"")
+        print(bla)
+    return bla
+
+def infoSlot(code,name,hours=0.0):
+    infoSlot = [code, name, hours]
+    return [infoSlot, f"{code}: {name} - {hours}"]
+
+# # debug infoSlot func
+# c = "INFO 101"
+# n = "Introduction to Computing and Security Technology"
+# h = 3.0
+# print(f"slot looks like this: {infoSlot(c,n,h)[0]}")
+# print(f"display looks like this: {infoSlot(c,n,h)[1]}")
+
+
+
 ## headers in list --> headers
 headers_soup = table.find_all("span", class_="courselistcomment areaheader")
 headers = []
-for i in headers_soup:
-    i = str(i.text)
-    s = re.findall("<.*?>",i)
-    for n in s:
-        i.remove(n,"")
-    if i!="":
-        headers.append(i)
-# print(headers)
 
-## cred hours converted to floats in list --> hours 
-hours_soup = table.find_all("td", class_="hourscol")
-hours = []
-for i in hours_soup:
-    i = str(i.text)
-    s = re.findall("<.*?>",i)
-    for n in s:
-        i.remove(n,"")
-    if i!="":
-        i = float(i)
-        hours.append(i)
-    else:
-        hours.append("N/A")
-hours.pop(0)
-# print(hours)
+
 
 code_soup = table.find_all("a", class_="bubblelink code")
 codes = []
+
+for i in headers_soup:
+    i = cleanScrape(i)
+    if i!="":
+        headers.append(i)
+
+
+# print(headers)
+
+## cred hours converted to floats in list --> hours 
+
+# hours_soup = table.find_all("td", class_="hourscol")
+# hours = []
+# for i in hours_soup:
+#     i = str(i.text)
+#     s = re.findall("<.*?>",i)
+#     for n in s:
+#         i.remove(n,"")
+#     if i!="":
+#         i = float(i)
+#         hours.append(i)
+#     else:
+#         hours.append("N/A")
+# hours.pop(0)
+# print(hours)
+
+
 for i in code_soup:
     i = str(i.text)
     s = re.findall("<.*?>",i)
