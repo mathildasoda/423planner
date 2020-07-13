@@ -33,9 +33,9 @@ def cleanScrape(bla):
         print(bla)
     return bla
 
-def infoSlot(code,name,hours=0.0):
+def infoSlot(code,name,hours):
     infoSlot = [code, name, hours]
-    return [infoSlot, f"{code}: {name} - {hours}"]
+    return infoSlot
 
 # # debug infoSlot func
 # c = "INFO 101"
@@ -80,17 +80,28 @@ for i in headers_soup:
 # hours.pop(0)
 # print(hours)
 
+slots = []
+class no_hourscol_error(Exception):
+    pass
+for c in code_soup:
+    n = c.findParent(class_="codecol").findNextSibling()
+    h = n.findNextSibling(class_="hourscol")       
+    c = cleanScrape(c)
+    n = cleanScrape(n)
+    if h!="" and h!=None:
+        h = cleanScrape(h)
+    if h==None or h=="":
+        h = "N/A"
+    if c!="":
+        c = c.replace(u"\xa0",u" ")
+    # debug print cnh
+    # print(f"{c}: {n} - {h}")
+    
+    newSlot = infoSlot(c,n,h)
+    slots.append(newSlot)
 
-for i in code_soup:
-    i = str(i.text)
-    s = re.findall("<.*?>",i)
-    for n in s:
-        i.remove(n,"")
-    if i!="":
-        i = i.replace(u"\xa0",u" ")
-        codes.append(i)
+# print("nubers of classes here:", len(codes))
 # print(codes)
+print(slots)
 
-# for i in range(len(codes)):
-#     print(f"{codes[i]}: {hours[i]}")
 
