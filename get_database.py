@@ -42,7 +42,7 @@ course_df.columns = ["TitleBlock" , "DescriptionBlock", "CourseID" , "CourseName
 
 course_df.DescriptionBlock = course_df.DescriptionBlock.str.replace("\n", "")
 
-
+#comment the line below to print only the first 5 + last 5 lines
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
 print(course_df)
