@@ -2,6 +2,8 @@ get_database.py churns out what essentially is "database" file.
 
 course.db is sql database
 
-to get course.db, you have to add codes to get_database.py. Code can be found in My_notebook.ipynb, on the bottom of the page. I don't think you really need those right now as it only convert dataframe into sql database, so just stick with it and experiments. 
+to get course.db, you have to add codes to get_database.py. Code can be found in My_notebook.ipynb, 
+on the bottom of the page. I don't think you really need those right now as it only convert dataframe into sql database, 
+so just stick with it and experiments. 
 
 Uncomment second to last line in get_database.py to get the shortenned version of the output code -> easier if you want to experiment with it. 
