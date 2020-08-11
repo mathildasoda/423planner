@@ -7,3 +7,5 @@ on the bottom of the page. I don't think you really need those right now as it o
 so just stick with it and experiments. 
 
 Uncomment second to last line in get_database.py to get the shortenned version of the output code -> easier if you want to experiment with it. 
+
+Also fyi, everything you need to know is in the jupyter notebook
